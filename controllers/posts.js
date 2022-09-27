@@ -1,24 +1,12 @@
 const cloudinary = require("../middleware/cloudinary");
 const Post = require("../models/Post");
 const Comment = require("../models/Comment");
+const Album = require("../models/Album");
+
+//cambiar delete o post de acuerdo a cual funcione
 
 module.exports = {
-  getProfile: async (req, res) => {
-    try {
-      const posts = await Post.find({ user: req.user.id });
-      res.render("profile.ejs", { posts: posts, user: req.user });
-    } catch (err) {
-      console.log(err);
-    }
-  },
-  getFeed: async (req, res) => {
-    try {
-      const posts = await Post.find().sort({ createdAt: "desc" }).lean();
-      res.render("feed.ejs", { posts: posts });
-    } catch (err) {
-      console.log(err);
-    }
-  },
+
   getPost: async (req, res) => {
     try {
       const post = await Post.findById(req.params.id);
@@ -40,9 +28,10 @@ module.exports = {
         caption: req.body.caption,
         likes: 0,
         user: req.user.id,
+        album: req.params.albumid,
       });
       console.log("Post has been added!");
-      res.redirect("/profile");
+      res.redirect(`/album/${req.params.albumid}`);
     } catch (err) {
       console.log(err);
     }
@@ -63,6 +52,7 @@ module.exports = {
   },
   deletePost: async (req, res) => {
     try {
+      let albumaidi = {album: id};
       // Find post by id
       let post = await Post.findById({ _id: req.params.id });
       // Delete image from cloudinary
@@ -70,9 +60,9 @@ module.exports = {
       // Delete post from db
       await Post.remove({ _id: req.params.id });
       console.log("Deleted Post");
-      res.redirect("/profile");
+      res.redirect(`/album/${albumaidi}`);
     } catch (err) {
-      res.redirect("/profile");
+      res.redirect(`/album/${albumaidi}`);
     }
   },
 };

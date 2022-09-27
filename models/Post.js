@@ -25,6 +25,10 @@ const PostSchema = new mongoose.Schema({
     type: mongoose.Schema.Types.ObjectId,
     ref: "User",
   },
+  album: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "Album",
+  },
   createdAt: {
     type: Date,
     default: Date.now,

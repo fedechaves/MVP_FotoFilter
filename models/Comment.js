@@ -22,6 +22,10 @@ const CommentSchema = new mongoose.Schema({
     type: mongoose.Schema.Types.ObjectId,
     ref: "User",
   },
+  album: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "Album",
+  },
   //! end changes
   createdAt: {
     type: Date,
