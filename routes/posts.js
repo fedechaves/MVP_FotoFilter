@@ -5,12 +5,12 @@ const postsController = require("../controllers/posts");
 
 
 //Post Routes - simplified for now
-router.get("/:id", postsController.getPost);
+router.get("/:albumid/:id", postsController.getPost);
 
 router.post("/createPost/:albumid", upload.single("file"), postsController.createPost);
 
 router.put("/likePost/:id", postsController.likePost);
 
-router.delete("/deletePost/:id", postsController.deletePost);
+router.delete("/deletePost/:albumid/:id", postsController.deletePost);
 
 module.exports = router;

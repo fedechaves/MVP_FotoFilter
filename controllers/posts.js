@@ -52,7 +52,6 @@ module.exports = {
   },
   deletePost: async (req, res) => {
     try {
-      let albumaidi = {album: id};
       // Find post by id
       let post = await Post.findById({ _id: req.params.id });
       // Delete image from cloudinary
@@ -60,9 +59,9 @@ module.exports = {
       // Delete post from db
       await Post.remove({ _id: req.params.id });
       console.log("Deleted Post");
-      res.redirect(`/album/${albumaidi}`);
+      res.redirect(`/album/${req.params.albumid}`);
     } catch (err) {
-      res.redirect(`/album/${albumaidi}`);
+      res.redirect(`/album/${req.params.albumid}`);
     }
   },
 };

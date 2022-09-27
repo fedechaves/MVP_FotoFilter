@@ -47,6 +47,7 @@ module.exports = {
       console.log(err);
     }
   },
+
 //   likePost: async (req, res) => {
 //     try {
 //       await Post.findOneAndUpdate(
