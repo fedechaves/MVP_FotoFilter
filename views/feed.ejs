@@ -1,12 +1,20 @@
 <%- include('partials/header') -%>
   <div class="container">
     <div class="row justify-content-center mt-5">
-      <ul class="row list-unstyled">
+      <ul class="carousel-item w-1/2 space-x-3">
         <% for(var i=0; i<albums.length; i++) {%>
           <li class="col-6 justify-content-between mt-5">
-            <a href="/album/<%= albums[i]._id%>">
-              <img class="img-fluid" src="<%= albums[i].image%>">
-            </a>
+            <div class="card w-96 bg-base-100 shadow-xl">
+              <a href="/album/<%= albums[i]._id%>">
+                <figure><img class="img-fluid" src="<%= albums[i].image%>"></figure>
+                <div class="card-body">
+                  <h2 class="card-title">
+                    <%= albums[i].title%>
+                  </h2>
+                  <p><%= albums[i].caption%></p>
+                </div>
+              </a>
+            </div>
           </li>
         <% } %>
         </ul>

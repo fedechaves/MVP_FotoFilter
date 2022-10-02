@@ -9,11 +9,12 @@ module.exports = {
         comment: req.body.comment,
         likes: 0,
         post: req.params.id,
+        album: req.params.albumid,
         createdBy: commentUser.userName,
         createdById: req.user.id
       });
       console.log("Comment has been added!");
-      res.redirect("/post/"+req.params.id);
+      res.redirect(`/post/${req.params.albumid}/${req.params.id}`);
     } catch (err) {
       console.log(err);
     }
@@ -23,7 +24,7 @@ module.exports = {
     try {
       await Comment.deleteOne({ _id: req.params.commentid })
       console.log("comment removed")
-      res.redirect("/post/"+req.params.postid);
+      res.redirect(`/post/${req.params.albumid}/${req.params.id}`);
     } catch (err) {
       console.log(err);
     }

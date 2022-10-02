@@ -5,39 +5,47 @@
           <div>
               <p><strong>User Name</strong>: <%= user.userName %></p>
               <p><strong>Email</strong>: <%= user.email %></p>
-              <a href="/logout" class="col-3 btn btn-primary">Logout</a>
+              <a href="/logout" class="col-3 btn btn-secondary">Logout</a>
           </div>
-          <div class="mt-5">
+          <div class="form-control">
             <h2>Add a post</h2>
             <form action="/post/createPost/<%=albums._id%>" enctype="multipart/form-data" method="POST">
-              <div class="mb-3">
-                  <label for="title" class="form-label">Title</label>
-                  <input type="text" class="form-control" id="title" name="title">
+              <div class="form-control">
+                  <label for="title" class="label">Title</label>
+                  <input type="text" class="textarea textarea-secondary" id="title" name="title">
               </div>
-              <div class="mb-3">
-                <label for="caption" class="form-label">Caption</label>
-                <textarea class="form-control" id="caption" name="caption"></textarea>
+              <div class="form-control">
+                <label for="caption" class="label">Caption</label>
+                <textarea class="textarea textarea-secondary" id="caption" name="caption"></textarea>
               </div>
-              <div class="mb-3">
-                <label for="imgUpload" class="form-label">Image</label>
-                <input type="file" class="form-control" id="imageUpload" name="file">
+              <div class="form-control">
+                <label for="imgUpload" class="label">Image</label>
+                <input type="file" class="input" id="imageUpload" name="file">
               </div>
-              <button type="submit" class="btn btn-primary" value="Upload">Submit</button>
+              <button  class="btn btn-secondary" value="Upload">Submit</button>
             </form>
           </div>
       </div>
-      <div class="col-6">
-        <ul class="row list-unstyled">
+      <div class="">
+        <ul class="carousel-item w-1/2 space-x-4">
         <% for(var i=0; i<posts.length; i++) {%>
           <li class="col-6 justify-content-between mt-5">
-            <a href="/post/<%= posts[i].album%>/<%= posts[i]._id%>">
-              <img class="img-fluid" src="<%= posts[i].image%>">
-            </a>
+            <div class="card w-96 bg-base-100 shadow-xl">
+              <a href="/post/<%= posts[i].album%>/<%= posts[i]._id%>">
+                <figure><img class="img-fluid" src="<%= posts[i].image%>"></figure>
+                <div class="card-body">
+                  <h2 class="card-title">
+                    <%= posts[i].title%>
+                  </h2>
+                  <p><%= posts[i].caption%></p>
+                </div>
+              </a>
+          </div>
           </li>
         <% } %>
         </ul>
         <div class="row justify-content-center mt-5">
-          <a class="btn btn-primary" href="/feed">Return to Feed</a>
+          <a class="btn btn-secondary" href="/feed">Return to Feed</a>
         </div>  
       </div>  
     </div>
