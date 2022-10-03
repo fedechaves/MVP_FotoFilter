@@ -1,56 +1,54 @@
 <%- include('partials/header') -%>
-<div class="container">
-  <div class="row mt-5">
-      <div class="col-6">
-          <div>
-              <p><strong>User Name</strong>: <%= user.userName %></p>
-              <p><strong>Email</strong>: <%= user.email %></p>
-              <a href="/logout" class="col-3 btn btn-secondary">Logout</a>
-          </div>
-          <div class="form-control">
-            <h2>Add an Album</h2>
-            <form action="/album/createAlbum" enctype="multipart/form-data" method="POST">
-              <div class="form-control">
-                  <label for="title" class="label">Title</label>
-                  <input type="text" class="textarea textarea-secondary" id="title" name="title">
-              </div>
-              <div class="form-control">
-                <label for="caption" class="label">Caption</label>
-                <textarea class="textarea textarea-secondary" id="caption" name="caption"></textarea>
-              </div>
-              <div class="form-control">
-                <label for="imgUpload" class="label">Image</label>
-                <input type="file" class="input" id="imageUpload" name="file">
-              </div>
-              <div class="form-control">
-                <button class="btn btn-secondary" value="Upload">Submit</button>
-              </div>
-            </form>
-          </div>
-      </div>
-      <div class="">
-        <ul class="carousel-item w-1/2 space-x-4">
-        <% for(var i=0; i<albums.length; i++) {%>
-          <li class="col-6 justify-content-between mt-5">
-            <div class="card w-96 bg-base-100 shadow-xl">
-              <a href="/album/<%= albums[i]._id%>">
-                <figure><img class="img-fluid" src="<%= albums[i].image%>"></figure>
-                <div class="card-body">
-                  <h2 class="card-title">
-                    <%= albums[i].title%>
-                  </h2>
-                  <p><%= albums[i].caption%></p>
-                </div>
-              </a>
-          </div>
-          </li>
-        <% } %>
-        </ul>
-        <div class="row justify-content-center mt-5">
-          <a class="btn btn-secondary" href="/feed">Return to Feed</a>
-        </div>  
-      </div>  
+<div class="container mx-auto px-4">
+  <div>
+    <p><strong>User Name</strong>: <%= user.userName %></p>
+    <p><strong>Email</strong>: <%= user.email %></p>
+    <a href="/logout" class="col-3 btn btn-secondary">Logout</a>
+  </div>
+  <div class="container mx-auto">
+    <div class="grid flex-grow card bg-base-300 rounded-box place-items-center">
+      <h2>Add an Album</h2>
+      <form action="/album/createAlbum" enctype="multipart/form-data" method="POST">
+        <div class="form-control">
+          <label for="title" class="label">Title</label>
+          <input type="text" class="textarea textarea-secondary" id="title" name="title">
+        </div>
+        <div class="form-control">
+          <label for="caption" class="label">Caption</label>
+          <textarea class="textarea textarea-secondary" id="caption" name="caption"></textarea>
+        </div>
+        <div class="form-control">
+          <label for="imgUpload" class="label">Image</label>
+          <input type="file" class="input" id="imageUpload" name="file">
+        </div>
+        <div class="form-control">
+          <button class="btn btn-secondary" value="Upload">Submit</button>
+        </div>
+      </form>
     </div>
+    <div class="divider divider-horizontal"></div>
+    <div class="grid flex-grow card bg-base-300 rounded-box columns-2 px-4">
+      <ul class="carousel-item w-1/2 space-x-4">
+      <% for(var i=0; i<albums.length; i++) {%>
+        <li class="col-6 justify-content-between mt-5">
+          <div class="card w-96 bg-base-100 shadow-xl">
+            <a href="/album/<%= albums[i]._id%>">
+              <figure><img class="img-fluid" src="<%= albums[i].image%>"></figure>
+              <div class="card-body">
+                <h2 class="card-title">
+                  <%= albums[i].title%>
+                </h2>
+                <p><%= albums[i].caption%></p>
+              </div>
+            </a>
+        </div>
+        </li>
+      <% } %>
+      </ul>
+      <div class="row justify-content-center mt-5">
+        <a class="btn btn-secondary" href="/feed">Return to Feed</a>
+      </div>  
+    </div> 
   </div>
 </div>
 <%- include('partials/footer') -%>

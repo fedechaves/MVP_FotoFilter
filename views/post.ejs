@@ -1,23 +1,25 @@
 <%- include('partials/header') -%>
-<div class="">
-  <div class="">
+<div class="container mt-5 px-4">
+  <div class="container">
     <div class="carousel-item w-1/2 space-x-4">
       <div class="col-6 justify-content-between mt-5">
         <h2><%= post.title%></h2>
         <figure><img class="img-fluid" src="<%= post.image%>"/></figure>
       </div>
     </div>
-    <div class="col-6 justify-content-between mt-5">
-      <form
-        class="form"
-        action="/post/likePost/<%= post.id %>?_method=PUT"
-        method="POST"
-      >
-        <button class="btn btn-secondary fa fa-heart" ></button>
-      </form>
-      <h3 class="col-1">Likes: <%= post.likes %></h3>
-      <%if(post.user == user.id){ %>
-      <form
+    <div class="flex space-x-80 mt-5">
+      <div>
+        <form
+          class="form"
+          action="/post/likePost/<%= post.id %>?_method=PUT"
+          method="POST"
+        >
+          <button class="btn btn-secondary fa fa-heart" ></button>
+        </form>
+        <h3 class="col-1">Likes: <%= post.likes %></h3>
+        <%if(post.user == user.id){ %>
+      </div>
+        <form
         action="/post/deletePost/<%=post.album%>/<%= post.id %>?_method=DELETE"
         method="POST"
         class="col-1"
