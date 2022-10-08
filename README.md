@@ -43,9 +43,9 @@ A simple Photo-Sharing App, built for group of friends or families to share the 
 
 # Lessons Learned:
 
-Added Tailwind for the first time, trying to make stylish webapp in a short period of time, specially in design. 
+I used tailwind for the first time to add quick, consistent, and responsive styling.. 
 
-In the future I would like to implement friends, tags, blurred face if the person that is in the photo don't like it, and add a choice for Google Authentication for login.  
+Optimizations: implement friends, tags, blurred face if the person that is in the photo don't like it, and add a choice for Google Authentication for login.  
 
 ---
 
