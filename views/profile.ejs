@@ -6,7 +6,8 @@
     <a href="/logout" class="col-3 btn btn-secondary">Logout</a>
   </div>
   <div class="container mb-2.5 mx-auto ">
-    <div class="grid flex-grow card bg-base-300 mb-2.5 rounded-box place-items-center">
+    <label id="dropdown" class="btn btn-secondary">Click</label>
+    <div class="hidden grid flex-grow card bg-base-300 mb-2.5 rounded-box place-items-center">
       <h2>Add an Album</h2>
       <form action="/album/createAlbum" enctype="multipart/form-data" method="POST">
         <div class="form-control">

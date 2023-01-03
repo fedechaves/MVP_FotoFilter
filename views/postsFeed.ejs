@@ -6,6 +6,7 @@
     <a href="/logout" class="col-3 btn btn-secondary">Logout</a>
   </div>
   <div class="container mx-auto">
+    <%if(albums.user == user.id){ %>
     <div class="w-96 justify-content-center mt-5 ">
       <h2>Add a post</h2>
       <form action="/post/createPost/<%=albums._id%>" enctype="multipart/form-data" method="POST">
@@ -24,6 +25,7 @@
         <button  class="btn btn-secondary" value="Upload">Submit</button>
       </form>
     </div>
+    <%}%>
     <div class="justify-content-center mt-5">
       <a class="btn btn-secondary" href="/feed">Return to Feed</a>
     </div>
