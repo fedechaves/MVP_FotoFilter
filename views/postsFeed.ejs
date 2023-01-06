@@ -7,7 +7,8 @@
   </div>
   <div class="container mx-auto">
     <%if(albums.user == user.id){ %>
-    <div class="w-96 justify-content-center mt-5 ">
+    <label id="dropdown" class="btn btn-secondary">Click</label>
+    <div class="hidden grid flex-grow card bg-base-300 mb-2.5 rounded-box place-items-center ">
       <h2>Add a post</h2>
       <form action="/post/createPost/<%=albums._id%>" enctype="multipart/form-data" method="POST">
         <div class="form-control">
@@ -30,7 +31,8 @@
       <a class="btn btn-secondary" href="/feed">Return to Feed</a>
     </div>
     <div class="container">
-      <ul class="columns-3 space-x-4">
+      <div class="flex flex-grow items-center justify-center card bg-base-300 rounded-box columns-2 px-4 pb-4">
+      <ul class="flex flex-wrap justify-evenly">
       <% for(var i=0; i<posts.length; i++) {%>
         <li class="col-6 justify-content-between mt-5">
           <div class="card w-96 bg-base-100 shadow-xl">
