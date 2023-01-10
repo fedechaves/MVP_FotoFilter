@@ -1,5 +1,8 @@
 <%- include('partials/header') -%>
 <div class="container mx-auto px-4">
+  <% if (locals.messages.errors) { %> <% messages.errors.forEach( el => { %>
+    <div class="alert alert-danger"><%= el.msg %></div>
+    <% }) %> <% } %>
   <div class="mb-2.5">
     <p><strong>User Name</strong>: <%= user.userName %></p>
     <p><strong>Email</strong>: <%= user.email %></p>
@@ -8,10 +11,9 @@
   <div class="container mb-2.5 mx-auto ">
     <label id="dropdown" class="btn btn-secondary">Click</label>
     <div class="hidden grid flex-grow card bg-base-300 mb-2.5 rounded-box place-items-center">
-      <% if (locals.messages.errors) { %> <% messages.errors.forEach( el => { %>
-        <div class="alert alert-danger"><%= el.msg %></div>
-        <% }) %> <% } %>   
+         
       <h2>Add an Album</h2>
+      
       <form action="/album/createAlbum" enctype="multipart/form-data" method="POST">
         <div class="form-control">
           <label for="title" class="label">Title</label>

@@ -44,6 +44,7 @@ module.exports = {
       console.log("Album has been added!");
       res.redirect("/profile");
     } catch (err) {
+      console.log(req)
       console.log(err);
     }
   },
