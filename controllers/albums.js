@@ -1,7 +1,6 @@
 const cloudinary = require("../middleware/cloudinary");
 const Album = require("../models/Album");
 const Post = require("../models/Post");
-const Comment = require("../models/Comment");
 
 module.exports = {
   getProfile: async (req, res) => {
@@ -51,12 +50,15 @@ module.exports = {
 
   deleteAlbum: async (req, res) => {
     try {
-      // Find post by id
+      // Find album by id
       let album = await Album.findById({ _id: req.params.id });
+      
       // Delete image from cloudinary
       await cloudinary.uploader.destroy(album.cloudinaryId);
-      // Delete post from db
+      // Delete album from db
       await Album.remove({ _id: req.params.id });
+      await Post.deleteMany({ album: req.album._id })
+
       console.log("Deleted Album");
       res.redirect("/profile");
     } catch (err) {
