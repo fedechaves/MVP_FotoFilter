@@ -1,6 +1,7 @@
 const cloudinary = require("../middleware/cloudinary");
 const Album = require("../models/Album");
 const Post = require("../models/Post");
+const { getAlbumPostsIterative } = require("../middleware/post");
 
 module.exports = {
   getProfile: async (req, res) => {
@@ -52,12 +53,20 @@ module.exports = {
     try {
       // Find album by id
       let album = await Album.findById({ _id: req.params.id });
+      let post = await Post.find({ album: req.params.id })
+      // console.log(album)
+      // console.log(post)
       
       // Delete image from cloudinary
+      for(let i = 0; i < post.length ; i++){
+        await cloudinary.uploader.destroy(post[i].cloudinaryId);
+      }
       await cloudinary.uploader.destroy(album.cloudinaryId);
-      // Delete album from db
+
+      for(let i = 0; i < post.length ; i++){
+        await Post.remove(post[i]);
+      }
       await Album.remove({ _id: req.params.id });
-      await Post.deleteMany({ album: req.album._id })
 
       console.log("Deleted Album");
       res.redirect("/profile");

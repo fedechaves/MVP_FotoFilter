@@ -7,7 +7,7 @@
   </div>
   <div class="container mx-auto">
     <%if(albums.user == user.id){ %>
-    <label id="dropdown" class="btn btn-secondary">Click</label>
+    <label id="dropdown" class="btn btn-secondary mt-1">Add Post</label>
     <div class="hidden grid flex-grow card bg-base-300 mb-2.5 rounded-box place-items-center ">
       <h2>Add a post</h2>
       <form action="/post/createPost/<%=albums._id%>" enctype="multipart/form-data" method="POST">
@@ -29,12 +29,14 @@
     <%}%>
     <div class="justify-content-center mt-5">
       <a class="btn btn-secondary" href="/feed">Return to Feed</a>
+      <% if(albums.user == user.id) {%> 
       <form
         action="/album/deleteAlbum/<%=albums.id%>?_method=DELETE"
         method="POST"
         class="col-1"
       >
-        <button class="btn btn-secondary fa fa-trash mt-5" >borrar album</button>
+        <button class="btn btn-outline btn-error mt-2" > Delete Album</button>
+      <% } %> 
     </div>
     <div class="container mb-2">
       <div class="flex flex-grow items-center justify-center card bg-base-300 rounded-box columns-2 px-4 pb-4">
