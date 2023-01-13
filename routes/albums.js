@@ -19,4 +19,6 @@ router.post("/createAlbum", upload.single("file"), function(req, res, next) {
 
 router.delete("/deleteAlbum/:id", albumsController.deleteAlbum);
 
+router.delete("/deleteAlbumProfile/:id?", albumsController.deleteAlbumProfile);
+
 module.exports = router;

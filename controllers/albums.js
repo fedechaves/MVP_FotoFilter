@@ -1,6 +1,7 @@
 const cloudinary = require("../middleware/cloudinary");
 const Album = require("../models/Album");
 const Post = require("../models/Post");
+const Comment = require("../models/Comment");
 const { getAlbumPostsIterative } = require("../middleware/post");
 
 module.exports = {
@@ -54,7 +55,8 @@ module.exports = {
       // Find album by id
       let album = await Album.findById({ _id: req.params.id });
       let post = await Post.find({ album: req.params.id })
-      // console.log(album)
+      let comment = await Comment.find({ album: req.params.id })
+      console.log(req.params.id)
       // console.log(post)
       
       // Delete image from cloudinary
@@ -62,11 +64,16 @@ module.exports = {
         await cloudinary.uploader.destroy(post[i].cloudinaryId);
       }
       await cloudinary.uploader.destroy(album.cloudinaryId);
-
-      for(let i = 0; i < post.length ; i++){
-        await Post.remove(post[i]);
+      //delete comments
+      for(let i = 0; i < comment.length ; i++){
+        await Comment.deleteOne(comment[i]);
       }
-      await Album.remove({ _id: req.params.id });
+      //delete album posts
+      for(let i = 0; i < post.length ; i++){
+        await Post.deleteOne(post[i]);
+      }
+      //delete album
+      await Album.deleteOne({ _id: req.params.id });
 
       console.log("Deleted Album");
       res.redirect("/profile");
@@ -74,4 +81,17 @@ module.exports = {
       res.redirect("/profile");
     }
   },
+  deleteAlbumProfile: async(req, res) => {
+    try {
+      let album = await Album.findById({ _id: req.params.id });
+      await cloudinary.uploader.destroy(album.cloudinaryId);
+      await Album.deleteOne({ _id: req.params.id });
+
+      console.log("Deleted Album");
+      res.redirect("/profile");
+    }
+    catch (err){
+      res.redirect("/profile")
+    }
+  }
 };
