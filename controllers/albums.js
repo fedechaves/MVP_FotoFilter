@@ -84,8 +84,25 @@ module.exports = {
   deleteAlbumProfile: async(req, res) => {
     try {
       let album = await Album.findById({ _id: req.params.id });
+      let post = await Post.find({ album: req.params.id })
+      let comment = await Comment.find({ album: req.params.id })
+
+      for(let i = 0; i < post.length ; i++){
+        await cloudinary.uploader.destroy(post[i].cloudinaryId);
+      }
       await cloudinary.uploader.destroy(album.cloudinaryId);
+
+      //delete comments
+      for(let i = 0; i < comment.length ; i++){
+        await Comment.deleteOne(comment[i]);
+      }
+      //delete album posts
+      for(let i = 0; i < post.length ; i++){
+        await Post.deleteOne(post[i]);
+      }
+      
       await Album.deleteOne({ _id: req.params.id });
+      
 
       console.log("Deleted Album");
       res.redirect("/profile");
